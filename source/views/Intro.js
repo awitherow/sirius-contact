@@ -39,6 +39,7 @@ export default class Intro extends React.Component {
   openAboutModal = () => console.log("cookoo!");
 
   render() {
+    console.log(theme.metrics);
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
@@ -95,12 +96,11 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontSize: 20,
-    fontWeight: "100",
-    fontFamily: Platform.OS === "android" ? "Roboto" : null
+    fontWeight: "100"
   },
   logo: {
-    height: 56,
-    width: theme.metrics.width * 0.9
+    height: 57.85,
+    width: 324
   },
   bottomPanel: {
     position: "absolute",

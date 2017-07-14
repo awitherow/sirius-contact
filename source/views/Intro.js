@@ -27,7 +27,8 @@ export default class Intro extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      light: require("../assets/fonts/Rajdhani-Light.ttf")
+      light: require("../assets/fonts/Rajdhani-Light.ttf"),
+      regular: require("../assets/fonts/Rajdhani-Regular.ttf")
     });
 
     this.setState({ loading: false });
@@ -56,7 +57,16 @@ export default class Intro extends React.Component {
                 toggle={this.toggleModal}
                 visible={this.state.infoModalVisible}
               >
-                <Text>Hello!</Text>
+                <Text style={styles.modalBodyText}>Hello!</Text>
+                <Text style={styles.modalBodyText}>
+                  This is the beginning of the new Sirius Contact Project.
+                </Text>
+                <Text style={styles.modalBodyText}>
+                  For more information about development, please email Austin at
+                  au.witherow@gmail.com.
+                </Text>
+                <Text style={styles.modalBodyText}>Thank you,</Text>
+                <Text style={styles.modalBodyText}>Sirius Disclosure Team</Text>
               </Modal>
 
               <Image
@@ -64,19 +74,19 @@ export default class Intro extends React.Component {
                 source={require("../assets/logo.png")}
               />
 
-              <Text style={[styles.text]}>Contact Tool</Text>
+              <Text style={[styles.bodyText]}>Contact Tool</Text>
 
               <View style={styles.bottomPanel}>
                 <TouchableOpacity onPress={this.toggleModal}>
                   <Ionicons
                     name="md-information-circle"
-                    size={40}
+                    size={48}
                     color={theme.colors.opaqueLightBlue(0.9)}
                   />
                 </TouchableOpacity>
 
                 <Button onPress={() => this.nav("Intro")}>
-                  <Text style={[styles.text, styles.buttonText]}>
+                  <Text style={[styles.bodyText, styles.buttonText]}>
                     GET STARTED
                   </Text>
                 </Button>
@@ -95,10 +105,14 @@ const styles = StyleSheet.create({
     width: null,
     height: null
   },
-  text: {
+  bodyText: {
     fontFamily: "light",
-    color: "white",
-    fontSize: 20
+    fontSize: 24,
+    color: "white"
+  },
+  modalBodyText: {
+    fontFamily: "regular",
+    fontSize: 24
   },
   logo: {
     height: 57.85,
@@ -115,6 +129,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   buttonText: {
-    fontSize: 16
+    fontSize: 24
   }
 });

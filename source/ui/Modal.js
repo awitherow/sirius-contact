@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
   },
   body: {
     marginTop: MODAL_HEADER_HEIGHT,
-    padding: 16
+    padding: 24
   }
 });

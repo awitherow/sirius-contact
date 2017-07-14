@@ -9,6 +9,8 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import Button from "../ui/Button";
+
 import { Ionicons } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import theme from "../theme";
@@ -58,17 +60,13 @@ export default class Intro extends React.Component {
               <View style={styles.bottomPanel}>
                 <TouchableOpacity onPress={this.openAboutModal}>
                   <Ionicons
-                    style={{ opacity: 0.8 }}
                     name="md-information-circle"
-                    size={42}
-                    color="white"
+                    size={40}
+                    color={theme.colors.opaqueLightBlue(0.9)}
                   />
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  onPress={() => this.nav("Intro")}
-                  style={styles.button}
-                >
+                <Button onPress={() => this.nav("Intro")}>
                   <Text
                     style={[
                       styles.text,
@@ -78,7 +76,7 @@ export default class Intro extends React.Component {
                   >
                     GET STARTED
                   </Text>
-                </TouchableOpacity>
+                </Button>
               </View>
             </Animatable.View>}
       </Image>
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     bottom: 24,
     paddingHorizontal: 24,
     flex: 1,
-    alignItems: "flex-end",
+    alignItems: "center",
     width: theme.metrics.width,
     flexDirection: "row",
     justifyContent: "space-between"

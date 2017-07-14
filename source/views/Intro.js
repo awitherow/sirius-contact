@@ -5,22 +5,24 @@ import {
   Text,
   Image,
   View,
-  Alert,
   TouchableOpacity
 } from "react-native";
 
-import Button from "../ui/Button";
-
 import { Ionicons } from "@expo/vector-icons";
-import * as Animatable from "react-native-animatable";
-import theme from "../theme";
-
 import { Font } from "expo";
+
+import * as Animatable from "react-native-animatable";
+
+import Button from "../ui/Button";
+import Modal from "../ui/Modal";
+
+import theme from "../theme";
 
 export default class Intro extends React.Component {
   static navigationOptions = { title: "Intro", header: null };
   state = {
-    loading: true
+    loading: true,
+    infoModalVisible: false
   };
 
   async componentDidMount() {
@@ -32,14 +34,14 @@ export default class Intro extends React.Component {
     this.refs.body.fadeIn();
   }
 
+  toggleModal = () =>
+    this.setState({ infoModalVisible: !this.state.infoModalVisible });
+
   nav = where => {
     this.props.navigation.navigate(where);
   };
 
-  openAboutModal = () => console.log("cookoo!");
-
   render() {
-    console.log(theme.metrics);
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
@@ -49,17 +51,23 @@ export default class Intro extends React.Component {
               ref="body"
               style={styles.container}
             >
+              <Modal
+                title="About The App"
+                toggle={this.toggleModal}
+                visible={this.state.infoModalVisible}
+              >
+                <Text>Hello!</Text>
+              </Modal>
+
               <Image
                 style={styles.logo}
                 source={require("../assets/logo.png")}
               />
 
-              <Text style={[styles.text, { fontFamily: "light" }]}>
-                Contact Tool
-              </Text>
+              <Text style={[styles.text]}>Contact Tool</Text>
 
               <View style={styles.bottomPanel}>
-                <TouchableOpacity onPress={this.openAboutModal}>
+                <TouchableOpacity onPress={this.toggleModal}>
                   <Ionicons
                     name="md-information-circle"
                     size={40}
@@ -68,13 +76,7 @@ export default class Intro extends React.Component {
                 </TouchableOpacity>
 
                 <Button onPress={() => this.nav("Intro")}>
-                  <Text
-                    style={[
-                      styles.text,
-                      styles.buttonText,
-                      { fontFamily: "light" }
-                    ]}
-                  >
+                  <Text style={[styles.text, styles.buttonText]}>
                     GET STARTED
                   </Text>
                 </Button>
@@ -94,6 +96,7 @@ const styles = StyleSheet.create({
     height: null
   },
   text: {
+    fontFamily: "light",
     color: "white",
     fontSize: 20,
     fontWeight: "100"
@@ -111,13 +114,6 @@ const styles = StyleSheet.create({
     width: theme.metrics.width,
     flexDirection: "row",
     justifyContent: "space-between"
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: theme.colors.opaqueLightBlue(0.8),
-    backgroundColor: theme.colors.opaqueDarkBlue(0.6),
-    paddingVertical: 8,
-    paddingHorizontal: 16
   },
   buttonText: {
     fontSize: 16

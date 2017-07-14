@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 import theme from "../theme";
 
 import { Font } from "expo";
@@ -26,6 +27,7 @@ export default class Intro extends React.Component {
     });
 
     this.setState({ loading: false });
+    this.refs.body.fadeIn();
   }
 
   nav = where => {
@@ -38,10 +40,12 @@ export default class Intro extends React.Component {
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
-          ? <View>
-              <Text>Loading</Text>
-            </View>
-          : <View style={styles.container}>
+          ? null
+          : <Animatable.View
+              duration={1000}
+              ref="body"
+              style={styles.container}
+            >
               <Image
                 style={styles.logo}
                 source={require("../assets/logo.png")}
@@ -76,7 +80,7 @@ export default class Intro extends React.Component {
                   </Text>
                 </TouchableOpacity>
               </View>
-            </View>}
+            </Animatable.View>}
       </Image>
     );
   }

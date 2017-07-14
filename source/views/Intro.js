@@ -5,41 +5,44 @@ import {
   Text,
   Image,
   View,
-  Alert,
   TouchableOpacity
 } from "react-native";
 
-import Button from "../ui/Button";
-
 import { Ionicons } from "@expo/vector-icons";
-import * as Animatable from "react-native-animatable";
-import theme from "../theme";
-
 import { Font } from "expo";
+
+import * as Animatable from "react-native-animatable";
+
+import Button from "../ui/Button";
+import Modal from "../ui/Modal";
+
+import theme from "../theme";
 
 export default class Intro extends React.Component {
   static navigationOptions = { title: "Intro", header: null };
   state = {
-    loading: true
+    loading: true,
+    infoModalVisible: false
   };
 
   async componentDidMount() {
     await Font.loadAsync({
-      light: require("../assets/fonts/Rajdhani-Light.ttf")
+      light: require("../assets/fonts/Rajdhani-Light.ttf"),
+      regular: require("../assets/fonts/Rajdhani-Regular.ttf")
     });
 
     this.setState({ loading: false });
     this.refs.body.fadeIn();
   }
 
+  toggleModal = () =>
+    this.setState({ infoModalVisible: !this.state.infoModalVisible });
+
   nav = where => {
     this.props.navigation.navigate(where);
   };
 
-  openAboutModal = () => console.log("cookoo!");
-
   render() {
-    console.log(theme.metrics);
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
@@ -49,32 +52,41 @@ export default class Intro extends React.Component {
               ref="body"
               style={styles.container}
             >
+              <Modal
+                title="About The App"
+                toggle={this.toggleModal}
+                visible={this.state.infoModalVisible}
+              >
+                <Text style={styles.modalBodyText}>Hello!</Text>
+                <Text style={styles.modalBodyText}>
+                  This is the beginning of the new Sirius Contact Project.
+                </Text>
+                <Text style={styles.modalBodyText}>
+                  For more information about development, please email Austin at
+                  au.witherow@gmail.com.
+                </Text>
+                <Text style={styles.modalBodyText}>Thank you,</Text>
+                <Text style={styles.modalBodyText}>Sirius Disclosure Team</Text>
+              </Modal>
+
               <Image
                 style={styles.logo}
                 source={require("../assets/logo.png")}
               />
 
-              <Text style={[styles.text, { fontFamily: "light" }]}>
-                Contact Tool
-              </Text>
+              <Text style={[styles.bodyText]}>Contact Tool</Text>
 
               <View style={styles.bottomPanel}>
-                <TouchableOpacity onPress={this.openAboutModal}>
+                <TouchableOpacity onPress={this.toggleModal}>
                   <Ionicons
                     name="md-information-circle"
-                    size={40}
+                    size={48}
                     color={theme.colors.opaqueLightBlue(0.9)}
                   />
                 </TouchableOpacity>
 
                 <Button onPress={() => this.nav("Intro")}>
-                  <Text
-                    style={[
-                      styles.text,
-                      styles.buttonText,
-                      { fontFamily: "light" }
-                    ]}
-                  >
+                  <Text style={[styles.bodyText, styles.buttonText]}>
                     GET STARTED
                   </Text>
                 </Button>
@@ -93,10 +105,14 @@ const styles = StyleSheet.create({
     width: null,
     height: null
   },
-  text: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "100"
+  bodyText: {
+    fontFamily: "light",
+    fontSize: 24,
+    color: "white"
+  },
+  modalBodyText: {
+    fontFamily: "regular",
+    fontSize: 24
   },
   logo: {
     height: 57.85,
@@ -112,14 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between"
   },
-  button: {
-    borderWidth: 1,
-    borderColor: theme.colors.opaqueLightBlue(0.8),
-    backgroundColor: theme.colors.opaqueDarkBlue(0.6),
-    paddingVertical: 8,
-    paddingHorizontal: 16
-  },
   buttonText: {
-    fontSize: 16
+    fontSize: 24
   }
 });

@@ -12,8 +12,21 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import theme from "../theme";
 
+import { Font } from "expo";
+
 export default class Intro extends React.Component {
   static navigationOptions = { title: "Intro", header: null };
+  state = {
+    loading: true
+  };
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      light: require("../assets/fonts/Rajdhani-Light.ttf")
+    });
+
+    this.setState({ loading: false });
+  }
 
   nav = where => {
     this.props.navigation.navigate(where);
@@ -24,27 +37,46 @@ export default class Intro extends React.Component {
   render() {
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
-        <Image style={styles.logo} source={require("../assets/logo.png")} />
+        {this.state.loading
+          ? <View>
+              <Text>Loading</Text>
+            </View>
+          : <View style={styles.container}>
+              <Image
+                style={styles.logo}
+                source={require("../assets/logo.png")}
+              />
 
-        <Text style={styles.text}>Contact Tool</Text>
+              <Text style={[styles.text, { fontFamily: "light" }]}>
+                Contact Tool
+              </Text>
 
-        <View style={styles.bottomPanel}>
-          <TouchableOpacity onPress={this.openAboutModal}>
-            <Ionicons
-              style={{ opacity: 0.8 }}
-              name="md-information-circle"
-              size={42}
-              color="white"
-            />
-          </TouchableOpacity>
+              <View style={styles.bottomPanel}>
+                <TouchableOpacity onPress={this.openAboutModal}>
+                  <Ionicons
+                    style={{ opacity: 0.8 }}
+                    name="md-information-circle"
+                    size={42}
+                    color="white"
+                  />
+                </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => this.nav("Intro")}
-            style={styles.button}
-          >
-            <Text style={[styles.text, styles.buttonText]}>GET STARTED</Text>
-          </TouchableOpacity>
-        </View>
+                <TouchableOpacity
+                  onPress={() => this.nav("Intro")}
+                  style={styles.button}
+                >
+                  <Text
+                    style={[
+                      styles.text,
+                      styles.buttonText,
+                      { fontFamily: "light" }
+                    ]}
+                  >
+                    GET STARTED
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>}
       </Image>
     );
   }

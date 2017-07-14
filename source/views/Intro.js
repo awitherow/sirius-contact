@@ -98,8 +98,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "light",
     color: "white",
-    fontSize: 20,
-    fontWeight: "100"
+    fontSize: 20
   },
   logo: {
     height: 57.85,

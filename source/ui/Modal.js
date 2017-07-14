@@ -17,25 +17,41 @@ export default function UIModal({ title, toggle, visible, children }) {
     >
       <View style={styles.header}>
         <Text style={styles.title}>
-          {title}
+          {title.toUpperCase()}
         </Text>
         <TouchableOpacity onPress={toggle}>
-          <Ionicons
-            name="ios-close"
-            size={40}
-            color={theme.colors.opaqueLightBlue(0.9)}
-          />
+          <Ionicons name="ios-close" size={64} color="black" />
         </TouchableOpacity>
       </View>
-      <View style={styles.modalBody}>
+      <View style={styles.body}>
         {children}
       </View>
     </Modal>
   );
 }
 
+const MODAL_HEADER_HEIGHT = 80;
+
 const styles = StyleSheet.create({
-  title: {},
-  header: {},
-  body: {}
+  title: {
+    color: "white",
+    fontFamily: "light",
+    color: "black",
+    fontSize: 32
+  },
+  header: {
+    position: "absolute",
+    height: MODAL_HEADER_HEIGHT,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 24,
+    left: 0,
+    right: 0
+  },
+  body: {
+    marginTop: MODAL_HEADER_HEIGHT,
+    padding: 16
+  }
 });

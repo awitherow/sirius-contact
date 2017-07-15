@@ -32,7 +32,9 @@ export default class Overview extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      bold: require("../assets/fonts/Rajdhani-Bold.ttf")
+      bold: require("../assets/fonts/Rajdhani-Bold.ttf"),
+
+      light: require("../assets/fonts/Rajdhani-Light.ttf")
     });
 
     this.setState({ loading: false });

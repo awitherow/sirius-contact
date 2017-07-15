@@ -27,7 +27,7 @@ export default class Intro extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      light: require("../assets/fonts/Rajdhani-Light.ttf"),
+      bold: require("../assets/fonts/Rajdhani-Bold.ttf"),
       regular: require("../assets/fonts/Rajdhani-Regular.ttf")
     });
 
@@ -47,11 +47,7 @@ export default class Intro extends React.Component {
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
           ? null
-          : <Animatable.View
-              duration={1000}
-              ref="body"
-              style={styles.container}
-            >
+          : <Animatable.View duration={1000} ref="body" style={styles.body}>
               <Modal
                 title="About The App"
                 toggle={this.toggleModal}
@@ -74,7 +70,7 @@ export default class Intro extends React.Component {
                 source={require("../assets/logo.png")}
               />
 
-              <Text style={[styles.bodyText]}>Contact Tool</Text>
+              <Text style={[styles.title]}>Contact Tool</Text>
 
               <View style={styles.bottomPanel}>
                 <TouchableOpacity onPress={this.toggleModal}>
@@ -105,8 +101,28 @@ const styles = StyleSheet.create({
     width: null,
     height: null
   },
+  body: {
+    backgroundColor: "rgba(0,0,0,0.75)",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 32,
+    width: theme.metrics.width,
+    height: theme.metrics.height
+  },
+  title: {
+    fontFamily: "bold",
+    fontSize: 24,
+    color: theme.colors.opaqueWhite(0.9),
+    textShadowColor: theme.colors.opaqueWhite(0.2),
+    textShadowOffset: {
+      width: 2,
+      height: 2
+    },
+    textShadowRadius: 2
+  },
   bodyText: {
-    fontFamily: "light",
+    fontFamily: "regular",
     fontSize: 24,
     color: "white"
   },
@@ -115,8 +131,9 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   logo: {
-    height: 57.85,
-    width: 324
+    width: 304,
+    height: 54,
+    opacity: 0.8
   },
   bottomPanel: {
     position: "absolute",
@@ -129,6 +146,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   buttonText: {
-    fontSize: 24
+    fontSize: 16
   }
 });

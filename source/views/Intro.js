@@ -85,7 +85,7 @@ export default class Intro extends React.Component {
                   />
                 </TouchableOpacity>
 
-                <Button onPress={() => this.nav("Intro")}>
+                <Button onPress={() => this.nav("Overview")}>
                   <Text style={[styles.bodyText, styles.buttonText]}>
                     GET STARTED
                   </Text>

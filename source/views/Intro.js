@@ -27,6 +27,7 @@ export default class Intro extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
+      light: require("../assets/fonts/Rajdhani-Light.ttf"),
       bold: require("../assets/fonts/Rajdhani-Bold.ttf"),
       regular: require("../assets/fonts/Rajdhani-Regular.ttf")
     });
@@ -53,7 +54,6 @@ export default class Intro extends React.Component {
                 toggle={this.toggleModal}
                 visible={this.state.infoModalVisible}
               >
-                <Text style={styles.modalBodyText}>Hello!</Text>
                 <Text style={styles.modalBodyText}>
                   This is the beginning of the new Sirius Contact Project.
                 </Text>
@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: null,
-    height: null
+    height: null,
+    backgroundColor: "black"
   },
   body: {
     backgroundColor: "rgba(0,0,0,0.75)",
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
   },
   modalBodyText: {
     fontFamily: "regular",
-    fontSize: 24
+    fontSize: 24,
+    marginBottom: 16
   },
   logo: {
     width: 304,

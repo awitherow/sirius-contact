@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: null,
-    height: null
+    height: null,
+    backgroundColor: "black"
   },
   possibilities: {
     backgroundColor: "rgba(0,0,0,0.75)",

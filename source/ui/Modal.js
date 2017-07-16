@@ -10,7 +10,7 @@ import theme from "../theme";
 export default function UIModal({ title, toggle, visible, children }) {
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={false}
       visible={visible}
       onRequestClose={() => console.log("closed info modal")}

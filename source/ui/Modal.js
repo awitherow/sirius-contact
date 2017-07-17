@@ -31,11 +31,12 @@ export default function UIModal({ title, toggle, visible, children }) {
 }
 
 const MODAL_HEADER_HEIGHT = 80;
+const MODAL_PADDING = MODAL_HEADER_HEIGHT * 0.25;
 
 const styles = StyleSheet.create({
   title: {
     color: "white",
-    fontFamily: "light",
+    fontFamily: "bold",
     color: "black",
     fontSize: 32
   },
@@ -46,12 +47,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 24,
+    paddingHorizontal: MODAL_PADDING,
     left: 0,
     right: 0
   },
   body: {
     marginTop: MODAL_HEADER_HEIGHT,
-    padding: 24
+    padding: MODAL_PADDING
   }
 });

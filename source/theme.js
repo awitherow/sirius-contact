@@ -38,6 +38,22 @@ const components = {
     inputStyle: {
       fontFamily: "regular"
     }
+  },
+  dynamicInput: function(state) {
+    switch (state) {
+      case "waiting":
+        return {};
+      case "success":
+        return {
+          borderWidth: 2,
+          borderColor: "green"
+        };
+      case "error":
+        return {
+          borderWidth: 2,
+          borderColor: "red"
+        };
+    }
   }
 };
 export default {

@@ -20,12 +20,15 @@ import Modal from "../ui/Modal";
 
 import theme from "../theme";
 
+import { subscribe } from "../services/mailchimp";
+
 export default class Intro extends React.Component {
   static navigationOptions = { title: "Intro", header: null };
   state = {
     loading: true,
     infoModalVisible: false,
-    promptVisible: false
+    promptVisible: false,
+    promptState: "waiting"
   };
 
   async componentDidMount() {
@@ -45,17 +48,41 @@ export default class Intro extends React.Component {
   toggleModal = () =>
     this.setState({ infoModalVisible: !this.state.infoModalVisible });
 
-  mail = email =>
-    this.setState({
-      promptVisible: false,
-      message: `You said "${email}"`
-    });
+  mail = async email => {
+    const subscribed = await subscribe(email);
+    if (subscribed) {
+      this.setState({
+        promptState: "success"
+      });
+
+      setTimeout(() => {
+        this.setState(
+          {
+            promptVisible: false
+          },
+          1000
+        );
+      });
+    } else {
+      this.setState({
+        promptState: "error"
+      });
+    }
+  };
 
   nav = where => {
     this.props.navigation.navigate(where);
   };
 
   render() {
+    const promptTheme = {
+      ...theme.components.prompt,
+      inputStyle: {
+        ...theme.components.prompt.inputStyle,
+        ...theme.components.dynamicInput(state)
+      }
+    };
+
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
@@ -76,7 +103,7 @@ export default class Intro extends React.Component {
                       message: "You cancelled"
                     })}
                   onSubmit={value => this.mail(value)}
-                  {...theme.components.prompt}
+                  {...promptTheme}
                 />
 
                 <Text style={styles.modalBodyText}>

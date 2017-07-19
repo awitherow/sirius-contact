@@ -56,13 +56,10 @@ export default class Intro extends React.Component {
       });
 
       setTimeout(() => {
-        this.setState(
-          {
-            promptVisible: false
-          },
-          1000
-        );
-      });
+        this.setState({
+          promptVisible: false
+        });
+      }, 1000);
     } else {
       this.setState({
         promptState: "error"

@@ -1,3 +1,5 @@
+import request from "superagent";
+import Buffer from "buffer";
 import { mailchimp } from "../config.js";
 const { instance, list, key } = mailchimp;
 

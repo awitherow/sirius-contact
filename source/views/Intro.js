@@ -67,9 +67,7 @@ export default class Intro extends React.Component {
     }
   };
 
-  nav = where => {
-    this.props.navigation.navigate(where);
-  };
+  nav = where => this.props.navigation.navigate(where);
 
   render() {
     const promptTheme = {

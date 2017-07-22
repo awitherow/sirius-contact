@@ -2,23 +2,6 @@ import { StyleSheet } from "react-native";
 import theme from "../../theme";
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: null,
-    height: null,
-    backgroundColor: "black"
-  },
-  body: {
-    backgroundColor: "rgba(0,0,0,0.75)",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 32,
-    width: theme.metrics.width,
-    height: theme.metrics.height
-  },
   title: {
     fontFamily: "bold",
     fontSize: 24,

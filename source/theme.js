@@ -42,8 +42,6 @@ const components = {
   },
   dynamicDialog: function(state) {
     switch (state) {
-      case "waiting":
-        return {};
       case "success":
         return {
           borderWidth: 4,

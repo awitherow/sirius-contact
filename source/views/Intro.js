@@ -8,6 +8,8 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import Prompt from "react-native-prompt";
+
 import { Ionicons } from "@expo/vector-icons";
 import { Font } from "expo";
 
@@ -18,11 +20,15 @@ import Modal from "../ui/Modal";
 
 import theme from "../theme";
 
+import { subscribe } from "../services/mailchimp";
+
 export default class Intro extends React.Component {
   static navigationOptions = { title: "Intro", header: null };
   state = {
     loading: true,
-    infoModalVisible: false
+    infoModalVisible: false,
+    promptVisible: false,
+    promptState: "waiting"
   };
 
   async componentDidMount() {
@@ -36,14 +42,42 @@ export default class Intro extends React.Component {
     this.refs.body.fadeIn();
   }
 
+  togglePrompt = () =>
+    this.setState({ promptVisible: !this.state.promptVisible });
+
   toggleModal = () =>
     this.setState({ infoModalVisible: !this.state.infoModalVisible });
 
-  nav = where => {
-    this.props.navigation.navigate(where);
+  mail = async email => {
+    const subscribed = await subscribe(email);
+    if (subscribed) {
+      this.setState({
+        promptState: "success"
+      });
+
+      setTimeout(() => {
+        this.setState({
+          promptVisible: false
+        });
+      }, 1000);
+    } else {
+      this.setState({
+        promptState: "error"
+      });
+    }
   };
 
+  nav = where => this.props.navigation.navigate(where);
+
   render() {
+    const promptTheme = {
+      ...theme.components.prompt,
+      dialogBodyStyle: {
+        ...theme.components.prompt.dialogBody,
+        ...theme.components.dynamicDialog(this.state.promptState)
+      }
+    };
+
     return (
       <Image source={require("../assets/galaxy.jpg")} style={styles.container}>
         {this.state.loading
@@ -54,15 +88,53 @@ export default class Intro extends React.Component {
                 toggle={this.toggleModal}
                 visible={this.state.infoModalVisible}
               >
+                <Prompt
+                  title="ENTER YOUR EMAIL"
+                  placeholder="truthseeker@..."
+                  visible={this.state.promptVisible}
+                  onCancel={() =>
+                    this.setState({
+                      promptVisible: false,
+                      message: "You cancelled"
+                    })}
+                  onSubmit={value => this.mail(value)}
+                  {...promptTheme}
+                />
+
                 <Text style={styles.modalBodyText}>
                   This is the beginning of the new Sirius Contact Project.
                 </Text>
                 <Text style={styles.modalBodyText}>
-                  For more information about development, please email Austin at
-                  au.witherow@gmail.com.
+                  If you wish to provide feedback, contribute or provide funding
+                  for further features...
                 </Text>
+                <Button
+                  style={{
+                    paddingVertical: 12,
+                    backgroundColor: theme.colors.darkBlue,
+                    borderWidth: 4,
+                    marginBottom: 16
+                  }}
+                  onPress={this.togglePrompt}
+                >
+                  <Text
+                    style={[
+                      styles.bodyText,
+                      styles.buttonText,
+                      {
+                        fontSize: 24,
+                        textAlign: "center",
+                        fontFamily: "regular"
+                      }
+                    ]}
+                  >
+                    MAKE CONTACT
+                  </Text>
+                </Button>
                 <Text style={styles.modalBodyText}>Thank you,</Text>
-                <Text style={styles.modalBodyText}>Sirius Disclosure Team</Text>
+                <Text style={styles.modalBodyText}>
+                  Your Sirius Disclosure Dev Team
+                </Text>
               </Modal>
 
               <Image

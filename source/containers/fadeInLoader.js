@@ -1,7 +1,7 @@
 import React, { Componenet } from "react";
 import { StyleSheet } from "react-native";
 
-export default function withFadeInLoader(Componenet) {
+export default function fadeInLoad(Componenet, props) {
   return class extends Component {
     state = {
       loading: true
@@ -24,7 +24,11 @@ export default function withFadeInLoader(Componenet) {
           source={require("../assets/galaxy.jpg")}
           style={styles.container}
         >
-          {this.state.loading ? null : <Component />}
+          {this.state.loading
+            ? null
+            : <Animatable.View duration={1000} ref="body" style={styles.body}>
+                <Component {...props} />
+              </Animatable.View>}
         </Image>
       );
     }
@@ -39,5 +43,14 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     backgroundColor: "black"
+  },
+  body: {
+    backgroundColor: "rgba(0,0,0,0.75)",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 32,
+    width: theme.metrics.width,
+    height: theme.metrics.height
   }
 });

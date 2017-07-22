@@ -1,7 +1,6 @@
 import React from "react";
 import { Platform, Text, Image, View, TouchableOpacity } from "react-native";
 import Prompt from "react-native-prompt";
-import * as Animatable from "react-native-animatable";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -27,7 +26,7 @@ class Intro extends React.Component {
 
   render() {
     return (
-      <Animatable.View duration={1000} ref="body" style={styles.body}>
+      <View>
         <AboutModal
           infoModalVisible={this.state.infoModalVisible}
           toggleModal={this.toggleModal}
@@ -52,7 +51,7 @@ class Intro extends React.Component {
             </Text>
           </Button>
         </View>
-      </Animatable.View>
+      </View>
     );
   }
 }

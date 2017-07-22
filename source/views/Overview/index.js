@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, Image, TouchableOpacity } from "react-native";
-import * as Animatable from "react-native-animatable";
 
 import fadeInLoad from "../../containers/fadeInLoader";
 

@@ -1,5 +1,6 @@
 import React, { Componenet } from "react";
 import { StyleSheet } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 export default function fadeInLoad(Componenet, props) {
   return class extends Component {

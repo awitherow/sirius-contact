@@ -37,21 +37,22 @@ const components = {
     cancelButtonTextStyle: {},
     inputStyle: {
       fontFamily: "regular"
-    }
+    },
+    dialogBodyStyle: {}
   },
-  dynamicInput: function(state) {
+  dynamicDialog: function(state) {
     switch (state) {
       case "waiting":
         return {};
       case "success":
         return {
-          borderWidth: 2,
-          borderColor: "green"
+          borderWidth: 4,
+          borderColor: "#6CC417"
         };
       case "error":
         return {
-          borderWidth: 2,
-          borderColor: "red"
+          borderWidth: 4,
+          borderColor: "#ff0033"
         };
     }
   }

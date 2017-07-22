@@ -72,9 +72,9 @@ export default class Intro extends React.Component {
   render() {
     const promptTheme = {
       ...theme.components.prompt,
-      inputStyle: {
-        ...theme.components.prompt.inputStyle,
-        ...theme.components.dynamicInput(state)
+      dialogBodyStyle: {
+        ...theme.components.prompt.dialogBody,
+        ...theme.components.dynamicDialog(this.state.promptState)
       }
     };
 

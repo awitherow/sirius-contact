@@ -20,7 +20,7 @@ const possibilities = [
     img: require("../assets/lights.jpg"),
     title: "Find the Others",
     description:
-      "Out there, there are countless truthseekers like you. Make contact."
+      "Make Contact together, get involved in the community. Coming Soon!"
   }
 ];
 

@@ -56,6 +56,7 @@ export default StyleSheet.create({
     justifyContent: "space-between"
   },
   buttonText: {
-    fontSize: 16
+    fontSize: 20,
+    fontFamily: "bold"
   }
 });

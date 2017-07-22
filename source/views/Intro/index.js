@@ -62,7 +62,7 @@ export default class Intro extends React.Component {
               <View style={styles.bottomPanel}>
                 <TouchableOpacity onPress={this.toggleModal}>
                   <Ionicons
-                    name="md-information-circle"
+                    name="ios-information-circle-outline"
                     size={48}
                     color={theme.colors.opaqueLightBlue(0.9)}
                   />

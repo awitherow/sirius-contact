@@ -14,9 +14,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   button: {
-    borderWidth: 1,
-    borderColor: theme.colors.opaqueLightBlue(0.8),
-    backgroundColor: theme.colors.opaqueDarkBlue(0.6),
+    backgroundColor: theme.colors.lightBlue,
     paddingVertical: 8,
     paddingHorizontal: 16
   }

@@ -75,7 +75,6 @@ export default class AboutModal extends React.Component {
           style={{
             paddingVertical: 12,
             backgroundColor: theme.colors.lightBlue,
-            borderWidth: 4,
             marginBottom: 16
           }}
           onPress={this.togglePrompt}

@@ -4342,9 +4342,9 @@ react-native-drawer-layout@1.3.2:
   version "0.15.2"
   resolved "https://github.com/expo/react-native-maps/archive/v0.15.2.tar.gz#e6a022511fbb53d0db5029dc0b159dd194a3763f"
 
-react-native-prompt@^1.0.0:
+react-native-prompt@awitherow/react-native-prompt#patch-2:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-prompt/-/react-native-prompt-1.0.0.tgz#41e0ec2aa7dd8f12f3a3ee83af9d63c4b670f8a1"
+  resolved "https://codeload.github.com/awitherow/react-native-prompt/tar.gz/4d22884683d4d48b8e49ae24e04742d300910680"
 
 react-native-safe-module@^1.1.0:
   version "1.2.0"
